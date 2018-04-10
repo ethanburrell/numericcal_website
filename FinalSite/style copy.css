@@ -1,0 +1,120 @@
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.edb-blue,.edb-hover-blue:hover{color:#fff!important;background-color:#003262!important}
+.gr {color:#fff!important;background:#292929!important}
+body {
+  margin: 0px
+}
+.title {
+  font-size:20px;
+  font-size: 1.5vw;
+}
+a.w3-bar-item.w3-button {
+    line-height: 2.5;
+}
+.page1 {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+.page1pad {
+  padding-top:0px;
+  padding-bottom:110px;
+  padding-left: 30%;
+  padding-right: 30%;
+  background: white;
+  /*margin-top:-55px*/
+}
+.page2pad {
+  padding-left: 20%;
+  padding-right: 20%;
+  background: white;
+  /*height: 80vh;*/
+  /*margin-top: -105px;*/
+}
+.page2pad img {
+  width:100%;
+}
+#fullPage {
+  /*margin-top:55px;*/
+}
+.page2pad ul {
+  margin: 0px;
+  padding-left: 30px;
+}
+.teamStyle h1,h3,h4{
+  margin:0px
+}
+.page2pad .contact {
+  text-align:left;
+}
+#contact *{
+  /*margin-top: -55px;*/
+  margin-bottom: 4px;
+}
+#contact h5{
+  font-size:1vw;
+}
+@media screen and (max-width: 800px) {
+  #contact h5{
+    font-size:initial;
+  }
+}
+@media screen and (max-width: 1000px) {
+.page2pad {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.page1pad {
+  padding-top:0px;
+  padding-bottom:110px;
+  padding-left: 20%;
+  padding-right: 20%;
+  background: white;
+  /*margin-top:-55px*/
+}
+.title {
+  font-size:20px;
+  font-size: 2.2vw;
+}
+}
+@media screen and (max-width: 800px) {
+.page2pad {
+  padding-left: 5px;
+  padding-right: 5px;
+  margin-top:0px
+}
+.page1pad {
+  padding-top:0px;
+  padding-bottom:110px;
+  padding-left: 15%;
+  padding-right: 15%;
+  background: white;
+  /*margin-top:-55px*/
+}
+.title {
+  font-size:20px;
+  font-size: 2.55vw;
+}
+}
+
+@media screen and (max-width: 650px) {
+  .page1pad {
+    padding-top: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+    margin-top: 105px;
+  }
+  .title {
+    font-size:20px;
+    font-size: 3.25vw;
+  }
+  .page2pad {
+    padding-top: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .page2pad img {
+    max-height:150px;
+    width: auto;
+  }
+}

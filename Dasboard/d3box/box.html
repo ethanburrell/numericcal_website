@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src= "https://cdn.zingchart.com/zingchart.min.js"></script>
+		<script> zingchart.MODULESDIR = "https://cdn.zingchart.com/modules/";
+		ZC.LICENSE = ["569d52cefae586f634c54f86dc99e6a9","ee6b7db5b51705a13dc2339db3edaf6d"];</script></head>
+	<body>
+		<div id='myChart'></div>
+    <script>
+    var myConfig = {
+        "graphset":[
+            {
+                "type":"hboxplot",
+                "plotarea":{
+                    "margin":"100"
+                },
+                "scaleX":{
+                    "guide":{
+                        "visible":false
+                    },
+                    "label":{
+                        "text":"Experiment No."
+                    },
+                    "values":["1","2","3","4","5"],
+                    "item":{
+                        "wrapText":true
+                    }
+                },
+                "scaleY":{
+                    "minValue":"auto",
+                    "guide":{
+                        "lineStyle":"solid"
+                    },
+                    "label":{
+                        "text":"Observations"
+                    },
+                    "item":{
+                        "wrapText":true
+                    }
+                },
+                "tooltip":{
+                    "fontSize":11,
+                    "align":"left",
+                    "borderRadius":7,
+                    "borderWidth":1,
+                    "backgroundColor":"#fff",
+                    "alpha":0.9,
+                    "padding":10,
+                    "color":"#000"
+                },
+                "plot":{
+
+                },
+                "options":{
+                    "box":{
+                        "barWidth":0.5,
+                        "tooltip":{
+                            "text":"<span style=\"font-style:italic;\">Experiment no. %scale-key-text</span><br><b style=\"font-size:15px;color:%color3\">Observations:</b><br><br>Maximum: <b>%data-max</b><br>Upper Quartile: <b>%data-upper-quartile</b><br>Median: <b>%data-median</b><br>Lower Quartile: <b>%data-lower-quartile</b><br>Minimum: <b>%data-min</b>"
+                        }
+                    },
+                    "outlier":{
+                        "tooltip":{
+                            "text":"<span style=\"font-style:italic;\">Experiment no. %scale-key-text</span><br><b style=\"font-size:15px;color:%color-7\">Observation: %node-value</b>"
+                        },
+                        "marker":{
+                            "type":"circle"
+                        }
+                    }
+                },
+                "series":[
+                    {
+                        "dataBox":[[760,801,848,895,965],
+                        [733,853,939,980,1080],
+                        [714,762,817,870,918],
+                        [724,802,836,871,950],
+                        [834,856,864,882,910]],
+                        "dataOutlier":[[0,644],
+                        [1,718],
+                        [4,951],
+                        [3,969],
+                        [2,944]]
+                    }
+                ]
+            }
+        ]
+    };
+
+    zingchart.render({
+    	id : 'myChart',
+    	data : myConfig,
+    	height: "100%",
+    	width: "100%"
+    });
+    </script>
+	</body>
+</html>

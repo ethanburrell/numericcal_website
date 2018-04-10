@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html>
+<title>Nummerical #3</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.edb-blue,.edb-hover-blue:hover{color:#fff!important;background-color:#003262!important}
+.gr {color:#fff!important;background:#292929!important}
+body {
+  margin: 0px
+}
+
+a.w3-bar-item.w3-button {
+    line-height: 2.5;
+}
+/*HEADER AND PARALLAX*/
+.parallax {
+    /* The image used */
+
+    background-image: url("images/parallax/1.jpg");
+    /* Repeates the background image*/
+    background-repeat: repeat-y;
+    /* Set a specific height */
+    min-height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.page1 {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+.page1pad {
+  padding-top:100px;
+  padding-bottom:110px;
+  padding-left: 30%;
+  padding-right: 30%;
+  background: white;
+  height: calc(100vh - 55px);
+}
+.page2pad {
+  padding-left: 20%;
+  padding-right: 20%;
+  background: white;
+  height: 80vh;
+}
+.page2pad img {
+  width:100%;
+}
+.intermediate {
+  height: calc(20vh);
+}
+.fifth {
+  width: 19.9999%;
+  float: left;
+  padding-left: 1.75%;
+  padding-right: 1.75%;
+}
+@media screen and (max-width: 1000px) {
+.page2pad {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+}
+@media screen and (max-width: 800px) {
+.page2pad {
+  padding-left: 5px;
+  padding-right: 5px;;
+}
+}
+@media screen and (max-width: 650px) {
+  /*
+  .parallax {
+
+      background-image: url("images/parallax/1mobile.jpg");
+
+      background-repeat: repeat-y;
+      min-width: 600px;
+
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+  */
+
+  .page1pad {
+    padding-top: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .page2pad {
+    padding-top: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .page4pad {
+    padding-top: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .page2pad img {
+    max-height:150px;
+    width: auto;
+  }
+  .page2pad .buildbuy {
+    width:100%;
+    max-height:none;
+    height: auto;
+  }
+  .intermediate {
+    height: 71px;
+  }
+  .fifth {
+    width:100%;
+    padding-left: 0px
+    padding-right: 0px
+  }
+}
+</style>
+<script>
+var scrolling = false;
+var currentPos = 0;
+
+    function scrollUp(){
+        if(!scrolling && currentPos > 0 ){
+            scrolling=true;
+            currentPos --;
+            var scrollToElement = $('.scrollTo')[currentPos];
+
+            $('html, body').animate({
+                scrollTop: $(scrollToElement).offset().top
+            }, 500, function(){
+                scrolling = false;
+            });
+        }
+    }
+
+    function scrollDown(){
+        if(!scrolling && currentPos < $('.scrollTo').length-1  ){
+            scrolling=true;
+            currentPos ++;
+            var scrollToElement = $('.scrollTo')[currentPos];
+
+            $('html, body').animate({
+                scrollTop: $(scrollToElement).offset().top
+            }, 500,function(){
+                scrolling = false;
+            });
+        }
+    }
+
+    $(document).ready(function() {
+
+        // Get the current position on load
+
+        for( var i = 0; i < $('.scrollTo').length; i++){
+            var elm = $('.scrollTo')[i];
+
+            if( $(document).scrollTop() >= $(elm).offset().top ){
+                currentPos = i;
+            }
+        }
+
+        $(document).bind('DOMMouseScroll', function(e){
+            if(e.originalEvent.detail > 0) {
+                scrollDown();
+            }else {
+                scrollUp();
+            }
+            return false;
+        });
+
+        $(document).bind('mousewheel', function(e){
+            if(e.originalEvent.wheelDelta < 0) {
+                scrollDown();
+            }else {
+                scrollUp();
+            }
+            return false;
+        });
+    });
+</script>
+</head>
+<body>
+  <div class="w3-top">
+    <div class="w3-bar gr container" id="myNavbar" style="">
+      <div class="w3-bar-item w3-wide">
+        <img src="images/white_tree.png" style="height: 2.5em"/>
+      </div>
+
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="#about" class="w3-bar-item w3-button" style="">Mission</a>
+        <a href="#about" class="w3-bar-item w3-button" style="">Technology</a>
+        <a href="#about" class="w3-bar-item w3-button" style="">About</a>
+        <!--
+        <a href="#about" class="w3-bar-item w3-button" style="">ABOUT</a>
+        <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+        <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+        <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> PRICING</a>
+        <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      -->
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+  <!-- don't know why I need this one br, but the website looks werid if it's not here -->
+  <br style="line-height:5em">
+<!-- PARALLAX AND HEADER -->
+<div class="parallax">
+<div class="w3-center w3-container page1pad w3-cell w3-cell-middle scrollTo" style="padding-top:0px;">
+<img src="images/numericcal_logo.png" class="w3-image w3-center" /> <br>
+<h2 class="w3-left-align"> Optimize and deploy deep learning on the edge. </h2>
+
+<a href="#" class="w3-btn w3-white w3-border w3-left" style="margin-right:8px; margin-bottom:8px">Login</a>
+<a href="#" class="w3-btn w3-white w3-border w3-left" style="">Get Started <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+</div>
+
+
+
+<div class="intermediate"> </div>
+
+
+
+<!-- AI -->
+<div class="w3-center w3-container page2pad w3-cell w3-cell-middle scrollTo" style="">
+<div class="w3-container">
+<h1> What We Do. </h1>
+<h2 style="text-align:left">
+Neural Networks Deployed on the Edge for Moblie Apps.
+</h2>
+<h4 style="text-align:left">
+  <small>
+  Artificial intelligence is becoming a reality thanks to the development of machine learning. Big companies are starting to take notice and finally hardware is able to run these taxing and complex algorithms. Developers are finding amazing and creative ways to apply deep learning. Running these in the cloud is costly, suffers from latency, and network connectivity issues. All that remains is a simple way to implement these applications on the device.
+We optimize Neural Networks so that they run on any device without connection to the internet.
+  </small>
+</h4>
+
+
+</h4>
+</div>
+</div>
+
+
+
+<div class="intermediate"> </div>
+
+
+
+
+<!-- WHY NEURAL NETWORKS? -->
+<div class="w3-center w3-container page2pad w3-cell w3-cell-middle scrollTo" style="">
+<h1> Why Neural Networks? </h1>
+<div class="w3-twothird w3-container">
+<h4 style="text-align:left">
+Neural Networks allow machines to learn on a human level. Over time, machines can learn to
+recognize items in pictures like cats and dogs, or even detect when the next earthquake will occur
+using technology called Neural Networks.
+</h4>
+</div>
+
+<div class="w3-third w3-container">
+<img src="images/nodes.png"/>
+</div>
+</div>
+
+
+
+<div class="intermediate"> </div>
+
+
+
+
+<!-- ADVANTAGES OVER CLOUD -->
+<div style="background:white;padding-left:10%;padding-right:10%;" class="page2pad w3-cell w3-cell-middle">
+<h1 style="text-align:center;font-size:3em; padding-bottom:8px"> Advantages Over Cloud </h1>
+<div class="w3-row" style="font-size:23px; text-align:center">
+<div class="fifth">
+  <img src="images/icons/graph.png" height="150" width="150" class="w3-image"/>
+  <h3>Increased performance</h3>
+  <h5> Neural Networks run in real time on your device.</h5>
+</div>
+<div class="fifth">
+  <img src="images/icons/clock.png" height="150" width="150" class="w3-image"/>
+  <h3>Decreased development time</h3>
+  <h5> Deploy in days instead of months.</h5>
+</div>
+<div class="fifth">
+  <img src="images/icons/money.png" height="150" width="150" class="w3-image"/>
+  <h3>Minimized data costs</h3>
+  <h5> No reliance on the Cloud, no server bills to pay. </h5>
+</div>
+<div class="fifth">
+  <img src="images/icons/devices.png" height="150" width="150" class="w3-image"/>
+  <h3>Functions on every device</h3>
+  <h5> Our API runs on any device. </h5>
+</div>
+<div class="fifth">
+  <img src="images/icons/no-wifi.png" height="150" width="150" class="w3-image"/>
+  <h3>No Network Required</h3>
+  <h5> Run your NN on the device without network access. </h5>
+</div>
+</div>
+</div>
+
+
+
+<div class="intermediate"> </div>
+
+
+
+
+
+<!-- WHY US -->
+<div class="w3-center w3-container w3-cell w3-cell-middle page2pad" style="">
+<h1> Why Us? </h1>
+<div class="w3-container">
+<h4 style="text-align:left">
+Nummerical allows you to focus on develping your application and training Neural Nets,
+instead of getting caught up in optimization accross a suite of devices. Using Numericcal
+allows your app development to be faster, cheaper, and simpler.
+</h4>
+</div>
+<div class="w3-container w3-half" >
+<h2> In House  </h2>
+<img src="images/build.png" height="600" width="600" class="w3-image buildbuy">
+</div>
+<div class="w3-container w3-half" >
+<h2> With Numericcal </h2>
+  <img src="images/buy.png" class="w3-image w3-center buildbuy" />
+</div>
+</div>
+
+
+
+<div class="intermediate"> </div>
+
+
+
+
+
+<!-- HOW IT WORKS -->
+<div class="w3-center w3-container w3-cell w3-cell-middle page2pad" style="">
+<h1>How It Works:</h1>
+<ul class="w3-ul" style="text-align:left">
+  <li class="w3-container">
+    <div class="w3-container w3-third w3-center">
+      <img src="images/light-bulb.png" class="w3-image" width="50px" height="50px" style="width:auto; height: 110px;"/>
+    </div>
+    <div>
+    <div class="w3-container w3-twothird">
+      <h3 style="margin:0">Idea</h3>
+      <h5 style="margin:0">
+        Design your mobile application, build and train your neural network!
+      </h5>
+    </div>
+  </div>
+  </li>
+<!-- NEXT ITEM-->
+  <li class="w3-container">
+    <div class="w3-container w3-third w3-center">
+      <img src="images/treelogo.png" class="w3-image" width="50px" height="50px" style="width:auto; height: 110px;"/>
+    </div>
+    <div>
+    <div class="w3-container w3-twothird">
+      <h3 style="margin:0">Optimize</h3>
+      <h5 style="margin:0">
+        Send us your Neural Network, and we will optimize your Neural Network to work on any device with our simple API.
+      </h5>
+    </div>
+    </div>
+  </li>
+  <!-- NEXT ITEM-->
+
+  <li class="w3-container">
+    <div class="w3-container w3-third w3-center">
+      <img src="images/phone.png" class="w3-image" width="50px" height="50px" style="width:auto; height: 110px;"/>
+    </div>
+    <div>
+    <div class="w3-container w3-twothird">
+      <h3 style="margin:0">Deploy</h3>
+      <h5 style="margin:0">
+        Release your app to the public. Every time your app is downloaded, our optimized Network will be distributed to your user's device; because the Neural Network runs on the device itself, you save on server costs.
+      </h5>
+    </div>
+    </div>
+  </li>
+</ul>
+</div>
+
+
+
+
+<div class="intermediate"> </div>
+
+
+
+
+
+<!-- TEAM -->
+<style>
+
+.page2pad ul {
+  margin: 0px;
+  padding-left: 30px;
+}
+.teamStyle h1,h3,h4{
+  margin:0px
+}
+</style>
+<div class="w3-center w3-container w3-cell w3-cell-middle page2pad" style="">
+<h1>Team</h1>
+<div class="w3-container w3-third" style="text-align:left">
+<div style="text-align:center">
+<img src="images/Team/RANKO.png" class="w3-image w3-round" width="474" height="474" />
+</div>
+<h3><strong>Ranko Sredojevic</strong></h3>
+<h4> CEO </h4>
+<p style="text-align:left;">
+Ranko finished his PhD in Electrical Engineering and Computer Science at MIT in 2013. Since then he has been
+busy finishing his Postdoc at UC Berkeley, as well as being involved in other startups. His research looks at
+the optimization of analog systems, including 1 research paper that was awarded the IEEE Best paper Award.
+</p>
+</div>
+
+<div class="w3-container w3-third" style="text-align:left">
+<div style="text-align:center">
+<img src="images/Team/SHAOYI.png" class="w3-image w3-round" width="474" height="474" />
+</div>
+<h3><strong>Shaoyi Cheng</strong></h3>
+<h4 style="margin:0px;"> CTO </h4>
+<p style="margin:0px;">
+Shaoyi works on the hardware optimization part of Numericcal, creating algorithms to make your neural networks run faster.
+</p>
+</div>
+
+
+<div class="w3-container w3-third" style="text-align:left">
+<div style="text-align:center">
+<img src="images/Team/ZACH.png" class="w3-image w3-round" width="474" height="474" />
+</div>
+<h3><strong>Zach Thigpen</strong></h3>
+<h4> COO </h4>
+<p style="margin:0px;">
+Zach heads up the buisness end of Numericcal, he has 6 years of startup marketing, strategy, and Buisness Development experience.
+</p>
+</div>
+</div>
+
+
+
+
+<div class="intermediate"> </div>
+
+
+
+
+
+<style>
+.page2pad .contact {
+  text-align:left;
+}
+</style>
+<!-- CONTACT US -->
+<div class="w3-center w3-container page2pad w3-cell w3-cell-middle" style="width:100vw;">
+<h1> Contact Us </h1>
+<form class="w3-container contact" name="Numerical Contact Form">
+  <h4>
+  <label>First Name</label>
+  <input class="w3-input" type="text">
+  </h4>
+  </h4>
+  <h4>
+  <label>Last Name</label>
+  <input class="w3-input" type="text">
+  </h4>
+  <h4>
+  <label>Email</label>
+  <input class="w3-input" type="text">
+  </h4>
+  <h4>
+  <label>Company</label>
+  <input class="w3-input" type="text">
+  </h4>
+  <br>
+  <h4>
+  <label>How can we help you?</label
+  </h4>
+  <select class="w3-select" name="option">
+  <option value="" disabled selected>Choose Option</option>
+  <option value="1">General Info (Keep Me Updated)</option>
+  <option value="2">Customer Inquiry</option>
+  <option value="3">Press Inquiry</option>
+  <option value="3">Other</option>
+  </select>
+
+  <p>
+  <label class="">Subject</label>
+  <textarea class="w3-input w3-border" rows="5" style="resize:none"></textarea>
+  </p>
+
+  <input type="submit" class="w3-btn w3-left w3-border" value="Send">
+</form>
+</div>
+<!--END DIV FROM PARALLAX-->
+</div>
+<!-- Start of HubSpot Embed Code -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4001349.js"></script>
+<!-- End of HubSpot Embed Code -->
+</body>
+</html>

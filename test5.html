@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html>
+<title>Nummerical #3</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.onepage-scroll.js"></script>
+<link href='onepage-scroll.css' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<head>
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
+.w3-bar,h1,button {font-family: "Montserrat", sans-serif}
+.edb-blue,.edb-hover-blue:hover{color:#fff!important;background-color:#003262!important}
+.gr {color:#fff!important;background:#292929!important}
+body {
+  margin: 0px
+}
+
+a.w3-bar-item.w3-button {
+    line-height: 2.5;
+}
+/*HEADER AND PARALLAX*/
+.parallax {
+    /* The image used */
+
+    /*background-image: url("images/parallax/1.jpg");*/
+    background: white;
+    /* Repeates the background image*/
+    background-repeat: repeat-y;
+    /* Set a specific height */
+    min-height: 500px;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.advantages {
+  padding-left:13%;
+  padding-right:13%;
+  height: 80vh;
+}
+/*
+.advantages .w3-quarter {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+*/
+.page1 {
+  padding-left: 30%;
+  padding-right: 30%;
+}
+.page1pad {
+  padding-top:100px;
+  padding-bottom:110px;
+  padding-left: 30%;
+  padding-right: 30%;
+  background: white;
+  height: calc(100vh - 55px);
+}
+.page2pad {
+  padding-left: 20%;
+  padding-right: 20%;
+  background: white;
+  height: 80vh;
+}
+.page2pad img {
+  width:100%;
+}
+.intermediate {
+  height: calc(5vh);
+}
+.fifth {
+  width: 19.9999%;
+  float: left;
+  padding-left: 1.75%;
+  padding-right: 1.75%;
+}
+.w3-ul li {
+  border-bottom: 0px;
+}
+.title {
+  font-size:20px;
+  font-size: 1.90vw;
+}
+@media screen and (max-width: 1000px) {
+.page2pad {
+  padding-left: 10%;
+  padding-right: 10%;
+}
+}
+@media screen and (max-width: 800px) {
+.page2pad {
+  padding-left: 5px;
+  padding-right: 5px;;
+}
+.advantages {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.fifth {
+  width:100%;
+  padding-left: 0px
+  padding-right: 0px
+}
+}
+/*
+@media screen and (max-width: 650px), (max-height: 650px) {
+*/
+@media screen and (max-width: 650px) {
+  /*
+  .parallax {
+
+      background-image: url("images/parallax/1mobile.jpg");
+
+      background-repeat: repeat-y;
+      min-width: 600px;
+
+      background-attachment: fixed;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+  */
+  .title {
+    font-size:20px;
+    font-size: 4.65vw;
+  }
+  .page1pad {
+    padding-top: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .page2pad {
+    padding-top: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .page4pad {
+    padding-top: 0px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .page2pad img {
+    max-height:150px;
+    width: auto;
+  }
+  .page2pad .buildbuy {
+    width:100%;
+    max-height:none;
+    height: auto;
+  }
+  .intermediate {
+    height: 71px;
+  }
+}
+</style>
+<script>
+//var max = Math.max((window.innerWidth || document.body.clientWidth), (window.innerHeight || document.body.clientHeight));
+var max = 800;
+if ((window.innerWidth || document.body.clientWidth) < 800) {
+  //max = (window.innerWidth || document.body.clientWidth) + 20;
+  max = 800;
+}
+if ((window.innerHeight || document.body.clientHeight) < 650) {
+  //max =(window.innerWidth || document.body.clientWidth) + 20;
+  max = ((window.innerHeight || document.body.clientHeight) * 800)/(window.innerWidth || document.body.clientWidth)
+}
+//var max = Math.max(.6*(window.innerWidth || document.body.clientWidth), (window.innerWidth || document.body.clientWidth)) + 20;
+console.log(max);
+
+$(document).ready(function(){
+  $(".main").onepage_scroll({
+    sectionContainer: "section",
+    responsiveFallback: max,
+  });
+  /*
+  $(".main").onepage_scroll({
+   sectionContainer: "section",     // sectionContainer accepts any kind of selector in case you don't want to use section
+   easing: "ease",                  // Easing options accepts the CSS3 easing animation such "ease", "linear", "ease-in",
+                                    // "ease-out", "ease-in-out", or even cubic bezier value such as "cubic-bezier(0.175, 0.885, 0.420, 1.310)"
+   animationTime: 1000,             // AnimationTime let you define how long each section takes to animate
+   pagination: true,                // You can either show or hide the pagination. Toggle true for show, false for hide.
+   updateURL: false,                // Toggle this true if you want the URL to be updated automatically when the user scroll to each page.
+   beforeMove: function(index) {},  // This option accepts a callback function. The function will be called before the page moves.
+   afterMove: function(index) {},   // This option accepts a callback function. The function will be called after the page moves.
+   loop: false,                     // You can have the page loop back to the top/bottom when the user navigates at up/down on the first/last page.
+   keyboard: true,                  // You can activate the keyboard controls
+   responsiveFallback: false,        // You can fallback to normal page scroll by defining the width of the browser in which
+                                    // you want the responsive fallback to be triggered. For example, set this to 600 and whenever
+                                    // the browser's width is less than 600, the fallback will kick in.
+   direction: "vertical"            // You can now define the direction of the One Page Scroll animation. Options available are "vertical" and "horizontal". The default value is "vertical".
+});
+*/
+});
+</script>
+</head>
+<body>
+  <div class="w3-top">
+    <div class="w3-bar gr container" id="myNavbar" style="">
+      <div class="w3-bar-item w3-wide">
+        <a href="#" onclick="$('.main').moveTo(1);">
+          <img src="images/white_tree.png" style="height: 2.5em"/>
+        </a>
+      </div>
+
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="#" onclick="$('.main').moveTo(2);" class="w3-bar-item w3-button" style="">Mission</a>
+        <a href="#" onclick="$('.main').moveTo(4);" class="w3-bar-item w3-button" style="">Advantages</a>
+        <a href="#" onclick="$('.main').moveTo(6);" class="w3-bar-item w3-button" style="">Why Us</a>
+        <a href="#" onclick="$('.main').moveTo(7);" class="w3-bar-item w3-button" style="">How It Works</a>
+        <a href="#" onclick="$('.main').moveTo(8);" class="w3-bar-item w3-button" style="">Team</a>
+        <a href="#" onclick="$('.main').moveTo(9);" class="w3-bar-item w3-button" style="">Contact</a>
+
+        <!--
+        <a href="#about" class="w3-bar-item w3-button" style="">ABOUT</a>
+        <a href="#team" class="w3-bar-item w3-button"><i class="fa fa-user"></i> TEAM</a>
+        <a href="#work" class="w3-bar-item w3-button"><i class="fa fa-th"></i> WORK</a>
+        <a href="#pricing" class="w3-bar-item w3-button"><i class="fa fa-usd"></i> PRICING</a>
+        <a href="#contact" class="w3-bar-item w3-button"><i class="fa fa-envelope"></i> CONTACT</a>
+      -->
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+  <!-- Sidebar on small screens when clicking the menu icon -->
+  <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+    <a href="#mission" onclick="w3_close()" class="w3-bar-item w3-button">Mission</a>
+    <a href="#advantages" onclick="w3_close()" class="w3-bar-item w3-button">Advantages</a>
+    <a href="#us" onclick="w3_close()" class="w3-bar-item w3-button">Why Us</a>
+    <a href="#works" onclick="w3_close()" class="w3-bar-item w3-button">How It Works</a>
+    <a href="#team" onclick="w3_close()" class="w3-bar-item w3-button">Team</a>
+    <a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button">Contact</a>
+  </nav>
+  <!-- don't know why I need this one br, but the website looks werid if it's not here -->
+  <br style="line-height:5em">
+
+<style>
+
+
+</style>
+<!-- PARALLAX AND HEADER -->
+<div class="main">
+<div class="parallax">
+<section>
+<div class="w3-center w3-container page1pad w3-cell w3-cell-middle scrollTo" style="padding-top:0px;">
+<img src="images/numericcal_logo.png" class="w3-image w3-center" /> <br>
+<h2 class="w3-left-align title"> Optimize and deploy deep learning on the edge. </h2>
+<a href="#contact" class="w3-btn w3-border w3-left" style="margin-right:8px; margin-bottom:8px">Contact Us</a>
+<!--
+<a href="#" class="w3-btn w3-white w3-border w3-left" style="margin-right:8px; margin-bottom:8px">Login</a>
+<a href="#" class="w3-btn w3-white w3-border w3-left" style="">Get Started <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+-->
+</div>
+</section>
+
+
+<div class="intermediate"> </div>
+
+
+<section>
+<!-- AI -->
+<div class="w3-center w3-container page2pad w3-cell w3-cell-middle scrollTo" id="mission">
+<div class="w3-container">
+<h1 style="text-align:left; font-size:2em"> Allow Companies to put Neural Networks on devices, instead of the cloud. </h1>
+
+<h4 style="text-align:left">
+For the past five years, machine learning in the form of neural networks (otherwise known as Deep Learning) has entered into everyday applications. Applications in computer vision, natural language processing, image recognition, and more are entering the fold and expanding the capability and performance of many applications. <br> <br>This is already being leveraged in the Cloud. However, many compelling technologies such as augmented/virtual reality, autonomous drones and vehicles, personal robotics, and IoT are promising but not yet feasible in the mainstream. The Cloud is unable to solve for the quality, speed, and connectivity that is necessary for these (and other unforeseen) applications to flourish.
+</h5>
+
+
+</h5>
+</div>
+</div>
+</section>
+
+
+<div class="intermediate"> </div>
+
+
+
+<section>
+<!-- WHY NEURAL NETWORKS? -->
+<div class="w3-center w3-container page2pad w3-cell w3-cell-middle" style="">
+<h1> Why Neural Networks? </h1>
+<div class="w3-twothird w3-container">
+<h4 style="text-align:left">
+Neural Networks allow machines to learn on a human level. Over time, machines can learn to
+recognize items in pictures like cats and dogs, or even detect when the next earthquake will occur
+using technology called Neural Networks.
+</h5>
+</div>
+
+<div class="w3-third w3-container">
+<img src="images/nodes.png"/>
+</div>
+</div>
+</section>
+
+
+<div class="intermediate"> </div>
+
+
+
+<section>
+<!-- ADVANTAGES OVER CLOUD -->
+<div style="margin-top:27px;"> </div>
+<div style="background:white;" class="w3-center w3-container advantages w3-cell w3-cell-middle" id="advantages">
+<h1 style="text-align:center; margin:0px;"> Advantages Over Cloud </h1> <!--font-size:3em;-->
+<h4 style="text-align:left; padding-bottom:16px">
+To reach its full potential Deep Learning must released from the confines of the Cloud and the dependency on highly-trained, scarce talent that only big Internet companies can afford. Edge deployment brings the following Value Propositions:
+</h4>
+<div class="w3-container w3-quarter w3-padding-16">
+  <img src="images/icons/money.png" height="150" width="150" class="w3-image"/>
+  <h3>Reduced cost</h3>
+  <h5 style="text-align:left">By pushing functions to the client (e.g. smartphone) side, the company can substantially reduce the cost of cloud infrastructure. </h5>
+</div>
+<div class="w3-container w3-quarter w3-padding-16">
+  <img src="images/icons/graph.png" height="150" width="150" class="w3-image"/>
+  <h3>Scalability</h3>
+  <h5 style="text-align:left">All services/features that are performed on the client side are naturally scalable since no new servers are necessary to support new users.</h5>
+</div>
+<div class="w3-container w3-quarter w3-padding-16">
+  <img src="images/icons/padlock.png" height="150" width="150" class="w3-image"/>
+  <h3>Privacy/Security</h3>
+  <h5 style="text-align:left">With data processing happening on the user side, less data is exposed to the Internet.</h5>
+</div>
+<div class="w3-container w3-quarter w3-padding-16">
+  <img src="images/icons/devices.png" height="150" width="150" class="w3-image"/>
+  <h3>User experience</h3>
+  <h5 style="text-align:left"> Local computation enables low response latency that cannot be obtained in Cloud-based designs due to network latency.</h5>
+</div>
+</div>
+</section>
+
+
+<div class="intermediate"> </div>
+
+
+
+<section>
+<!-- ADVANTAGES OVER CLOUD -->
+<div style="margin-top:27px;"> </div>
+<div style="background:white;" class="w3-center w3-container advantages w3-cell w3-cell-middle" id="advantages">
+<h1 style="text-align:center; margin:0px;"> Deploying on the Edge </h1> <!--font-size:3em;-->
+<h4 style="text-align:left; padding-bottom:16px" class="w3-center">
+Very few deployments are happening on the Edge, for three reasons:
+</h4>
+<div class="w3-row">
+<div class="w3-container w3-third w3-center w3-padding-16">
+  <!-- <img src="images/icons/money.png" height="150" width="150" class="w3-image"/> -->
+  <h3>No Standardization</h3>
+  <h5 style="text-align:left;"> There are no standard frameworks that perform well and are easy to use on Edge devices.</h5>
+</div>
+<div class="w3-container w3-third w3-center w3-padding-16">
+  <!-- <img src="images/icons/graph.png" height="150" width="150" class="w3-image"/> -->
+  <h3>No Infrastructure</h3>
+  <h5 style="text-align:left;">There does not exist a simple way for most developers to build optimized code, so they must build custom solutions for each device they want to run on.</h5>
+</div>
+<div class="w3-container w3-third w3-center w3-padding-16">
+  <!-- <img src="images/icons/padlock.png" height="150" width="150" class="w3-image" />-->
+  <h3>No Talent</h3>
+  <h5 style="text-align:left;">There is hypercompetition for the small talent pool of AI and performance developers, driving up the costs to the point only the biggest tech companies can afford these highly sought after employees.</h5>
+</div>
+</div>
+</div>
+</section>
+
+
+<div class="intermediate"> </div>
+
+
+
+
+<section>
+<!-- WHY US -->
+<div class="w3-center w3-container w3-cell w3-cell-middle page2pad" id="us">
+<h1> Why Us? </h1>
+<div class="w3-container">
+<h4 style="text-align:left">
+Nummerical allows you to focus on develping your application and training Neural Nets,
+instead of getting caught up in optimization accross a suite of devices. Using Numericcal
+allows your app development to be faster, cheaper, and simpler.
+</h5>
+</div>
+<div class="w3-container w3-half" >
+<h2> In House  </h2>
+<img src="images/build.png" height="600" width="600" class="w3-image buildbuy">
+</div>
+<div class="w3-container w3-half" >
+<h2> With Numericcal </h2>
+  <img src="images/buy.png" class="w3-image w3-center buildbuy" />
+</div>
+</div>
+</section>
+
+
+<div class="intermediate"> </div>
+
+
+
+
+<section>
+<!-- HOW IT WORKS -->
+<div class="w3-center w3-container w3-cell w3-cell-middle page2pad" id="works">
+<h1>How It Works:</h1>
+<ul class="w3-ul" style="text-align:left">
+  <li class="w3-container">
+    <div class="w3-container w3-third w3-center">
+      <img src="images/light-bulb.png" class="w3-image" width="50px" height="50px" style="width:auto; height: 110px;"/>
+    </div>
+    <div>
+    <div class="w3-container w3-twothird">
+      <h3 style="margin:0">Idea</h3>
+      <h5 style="margin:0">
+        Design your mobile application, build and train your neural network!
+      </h5>
+    </div>
+  </div>
+  </li>
+<!-- NEXT ITEM-->
+  <li class="w3-container">
+    <div class="w3-container w3-third w3-center">
+      <img src="images/treelogo.png" class="w3-image" width="50px" height="50px" style="width:auto; height: 110px;"/>
+    </div>
+    <div>
+    <div class="w3-container w3-twothird">
+      <h3 style="margin:0">Optimize</h3>
+      <h5 style="margin:0">
+        Send us your Neural Network, and we will optimize your Neural Network to work on any device with our simple API.
+      </h5>
+    </div>
+    </div>
+  </li>
+  <!-- NEXT ITEM-->
+
+  <li class="w3-container">
+    <div class="w3-container w3-third w3-center">
+      <img src="images/phone.png" class="w3-image" width="50px" height="50px" style="width:auto; height: 110px;"/>
+    </div>
+    <div>
+    <div class="w3-container w3-twothird">
+      <h3 style="margin:0">Deploy</h3>
+      <h5 style="margin:0">
+        Release your app to the public. Every time your app is downloaded, our optimized Network will be distributed to your user's device; because the Neural Network runs on the device itself, you save on server costs.
+      </h5>
+    </div>
+    </div>
+  </li>
+</ul>
+</div>
+</section>
+
+
+
+<div class="intermediate"> </div>
+
+
+
+
+<section>
+<!-- TEAM -->
+<style>
+
+.page2pad ul {
+  margin: 0px;
+  padding-left: 30px;
+}
+.teamStyle h1,h3,h4{
+  margin:0px
+}
+</style>
+<div class="w3-center w3-container w3-cell w3-cell-middle page2pad" id="team">
+<h1>Team</h1>
+<div class="w3-container w3-third" style="text-align:left">
+<div style="text-align:center">
+<img src="images/Team/RANKO.png" class="w3-image w3-round" width="474" height="474" />
+</div>
+<h3><strong>Ranko Sredojevic</strong></h3>
+<h4 style="margin:0px;"> CEO </h4>
+<p style="text-align:left; margin:0px;">
+Ranko finished his PhD in Electrical Engineering and Computer Science at MIT in 2013. Since then he has been
+busy finishing his Postdoc at UC Berkeley, as well as being involved in other startups. His research looks at
+the optimization of analog systems, including 1 research paper that was awarded the IEEE Best paper Award.
+</p>
+</div>
+
+<div class="w3-container w3-third" style="text-align:left">
+<div style="text-align:center">
+<img src="images/Team/SHAOYI.png" class="w3-image w3-round" width="474" height="474" />
+</div>
+<h3><strong>Shaoyi Cheng</strong></h3>
+<h4 style="margin:0px;"> CTO </h4>
+<p style="margin:0px;">
+Shaoyi works on the hardware optimization part of Numericcal, creating algorithms to make neural networks run faster. He has a Doctorate from UC Berkeley, and he previously worked at the circuit design company, Xilinx.
+</p>
+</div>
+
+
+<div class="w3-container w3-third" style="text-align:left">
+<div style="text-align:center">
+<img src="images/Team/ZACH.png" class="w3-image w3-round" width="474" height="474" />
+</div>
+<h3><strong>Zach Thigpen</strong></h3>
+<h4 style="margin:0px;"> CTO </h4>
+<p style="margin:0px;">
+Zach heads up the buisness end of Numericcal, he has 6 years of startup marketing, strategy, and Buisness Development experience. He has 6 years of Venture Capitalist Experience, most recently working at Bee Partners.
+</p>
+</div>
+</div>
+</section>
+
+
+
+<div class="intermediate"> </div>
+
+
+
+
+<section>
+<style>
+.page2pad .contact {
+  text-align:left;
+}
+</style>
+<!-- CONTACT US -->
+<div class="w3-center w3-container page2pad w3-cell w3-cell-middle" style="width:100vw;" id="contact">
+<h1> Contact Us </h1>
+<form class="w3-container contact" name="Numerical Contact Form">
+  <h5>
+  <label>First Name</label>
+  <input class="w3-input" type="text" required>
+  </h5>
+  </h5>
+  <h5>
+  <label>Last Name</label>
+  <input class="w3-input" type="text" required>
+  </h5>
+  <h5>
+  <label>Email</label>
+  <input class="w3-input" type="text" required>
+  </h5>
+  <h5>
+  <label>Company (Optional)</label>
+  <input class="w3-input" type="text">
+  </h5>
+  <h5>
+  <label>Role (Optional)</label>
+  <input class="w3-input" type="text">
+  </h5>
+  <br>
+  <h5>
+  <label>How can we help you?</label>
+  </h5>
+  <select class="w3-select" name="option">
+  <option value="" disabled selected>Choose Option</option>
+  <option value="1">General Info (Keep Me Updated)</option>
+  <option value="2">Customer Inquiry</option>
+  <option value="3">Press Inquiry</option>
+  <option value="4">Alpha Inquiry</option>
+  <option value="3">Other</option>
+  </select>
+
+  <h5>
+  <label class="">Subject</label required>
+  <textarea class="w3-input w3-border" rows="3" style="resize:none" required></textarea>
+</h5>
+
+  <input type="submit" class="w3-btn w3-left w3-border" value="Send">
+</form>
+</div>
+</section>
+<!--END DIV FROM PARALLAX-->
+</div>
+</div>
+<!-- Start of HubSpot Embed Code -->
+  <script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4001349.js"></script>
+<!-- End of HubSpot Embed Code -->
+<script>
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+    if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+    } else {
+        mySidebar.style.display = 'block';
+    }
+}
+// Close the sidebar with the close button
+function w3_close() {
+    mySidebar.style.display = "none";
+}
+</script>
+<!-- Hotjar Tracking Code for https://ehallpass-d65b2.firebaseapp.com/#9 -->
+
+</body>
+</html>

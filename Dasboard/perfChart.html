@@ -1,0 +1,315 @@
+
+<!doctype html>
+<html>
+
+<head>
+    <title>Performance Summary for Network TinyYOLO</title>
+    <script src="http://www.chartjs.org/dist/2.7.1/Chart.bundle.js"></script>
+    <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+.styled-select-left {
+
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+   margin-left: 10%;
+   margin-top: 3%;
+   float: left
+    
+}
+
+.styled-select-left select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+   
+}
+
+
+
+.styled-select-right {
+
+   height: 29px;
+   overflow: hidden;
+   width: 240px;
+   margin-right: 20%;
+   margin-top: 3%;
+   float: right
+    
+}
+
+.styled-select-right select {
+   background: transparent;
+   border: none;
+   font-size: 14px;
+   height: 29px;
+   padding: 5px; /* If you add too much padding here, the options won't show in IE */
+   width: 268px;
+   
+}
+
+/* -------------------- Rounded Corners */
+.rounded {
+   -webkit-border-radius: 20px;
+   -moz-border-radius: 20px;
+   border-radius: 20px;
+}
+
+
+/* -------------------- Colors: Background */
+.slate   { background-color: #ddd; }
+.green   { background-color: #779126; }
+.blue    { background-color: #3b8ec2; }
+.yellow  { background-color: #eec111; }
+.black   { background-color: #000; }
+
+/* -------------------- Colors: Text */
+.slate select   { color: #000; }
+.green select   { color: #fff; }
+.blue select    { color: #fff; }
+.yellow select  { color: #000; }
+.black select   { color: #fff; }
+
+
+
+
+
+    </style>
+</head>
+
+<body>
+    <script type="text/javascript" src="perfData.js"></script> 
+    
+    
+    <div id="container" style="width: 80%;">
+        <canvas id="canvas"></canvas>
+    </div>
+    <div style="width: 80%; overflow: hidden;">
+
+        <div class="styled-select-left slate rounded">
+            <select id="otherModelAdd" onChange="handleOtherModelAddSelected(this.value)">
+              <option value="" disabled selected >Add Model to Compare...</option>
+            </select>           
+        </div>
+        
+        <div class="styled-select-right slate rounded" id="modelRemContainer">
+            <select id="otherModelRem" onChange="handleOtherModelRemoveSelected(this.value)">
+              <option value="" disabled selected >Remove Model...</option>
+            </select>           
+        </div>
+    </div>    
+    
+    
+    <script>
+        
+        var displayedModel = {}
+        window.onload = function() {
+            var regex = new RegExp("[?&]" + "model" + "(=([^&#]*)|&|#|$)");
+            var modelInfo = regex.exec(location);
+            var curModelId =  modelInfo[2];
+            
+            console.log(modelInfo[2]);
+            
+            var curPerfData = phonePerformance[curModelId];
+            // sorted according to value by backend
+            
+            var curPhones = curPerfData.map(function(item){return Object.keys(item)[0]})
+            var curData = curPerfData.map(function(item){return Object.values(item)[0]})
+            
+            
+
+            var horizontalBarChartData = {
+                labels: curPhones,
+                datasets: [{
+                    label: ID2ModelName[curModelId],
+                    backgroundColor: Chart.helpers.color(window.chartColors.red).alpha(0.5).rgbString(),
+                    borderColor: window.chartColors.red,
+                    borderWidth: 1,
+                    data: curData
+                }]
+
+            };
+            displayedModel[curModelId] = horizontalBarChartData.datasets[0];
+
+
+
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myHorizontalBar = new Chart(ctx, {
+                type: 'horizontalBar',
+                data: horizontalBarChartData,
+                options: {
+                    // Elements options apply to all of the options unless overridden in a dataset
+                    // In this case, we are setting the border of each horizontal bar to be 2px wide
+                    elements: {
+                        rectangle: {
+                            borderWidth: 2,
+                        }
+                    },
+                    responsive: true,
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        fontSize: 20,
+                        text: 'Average Frame Per Second '
+                    },
+                    scales: {
+                        animation: false,
+                        xAxes: [{
+                            display: true,
+                            ticks: {
+                                suggestedMin: 0,
+
+                            }
+                        }]
+                    },
+                    onClick: handleClick
+                }
+            });
+            // now populate the list of other models for comparison
+            var otherModelList = document.getElementById("otherModelAdd");
+            var allModelIds = Object.keys(ID2ModelName)
+            for(modelIdInd in allModelIds)
+            {
+                var modelId = allModelIds[modelIdInd];
+                if(modelId !== curModelId )
+                {
+                    modelName2Add = ID2ModelName[modelId];
+                    var option = document.createElement("option")
+                    option.text = modelName2Add
+                    option.value = modelId
+                    otherModelList.appendChild(option)
+                }
+            }
+            document.getElementById("modelRemContainer").style.visibility = "hidden";
+
+        };
+        
+        function handleClick(evt)
+        {
+            /*var activeElement = window.myHorizontalBar.getElementAtEvent(evt);
+            // find out which phone it is
+            var curModelSha = Object.keys(displayedModel)[activeElement[0]._datasetIndex]
+            
+            console.log()
+            console.log(window.myHorizontalBar.data.datasets[activeElement[0]._datasetIndex].data[activeElement[0]._index]);
+            console.log(window.myHorizontalBar.data.labels[activeElement[0]._index]   );
+            window.location.href = "histogram.html?shasys=ff";*/
+        }
+        
+        var colorNames = Object.keys(window.chartColors);
+        function moveModelBetweenSelection(srcSel, dstSel,modelId)
+        {
+            modelName2Add = ID2ModelName[modelId];
+            var option = document.createElement("option");
+            option.text = modelName2Add;
+            option.value = modelId;
+            dstSel.appendChild(option) ;
+            
+            for(var i=0; i<srcSel.length; i++)
+            {
+                if(srcSel[i].value == modelId)
+                {
+                    srcSel.removeChild(srcSel[i])
+                }
+            }  
+            
+        }
+        function handleOtherModelRemoveSelected(remModelId)
+        {
+            var removeModelList = document.getElementById('otherModelRem');
+            removeModelList[0].selected = true;
+            if(remModelId == "")
+            {
+                return;
+            }
+            var addModelList = document.getElementById("otherModelAdd");
+            moveModelBetweenSelection(removeModelList,addModelList,remModelId);   
+            // remove from the dataset
+            var ind = window.myHorizontalBar.data.datasets.indexOf(displayedModel[remModelId]);
+            
+            if(ind !== -1)  
+            {
+                window.myHorizontalBar.data.datasets.splice(ind,1);
+                delete displayedModel[remModelId];               
+            }
+            window.myHorizontalBar.update();
+
+            if(Object.keys(displayedModel).length==1)
+            {                
+                document.getElementById("modelRemContainer").style.visibility = "hidden";
+            }
+            
+        }
+        function handleOtherModelAddSelected(otherModelId)
+        {
+
+            var addModelList = document.getElementById('otherModelAdd');
+            addModelList[0].selected = true;
+            if(otherModelId == "")
+            {
+                return;
+            }
+            
+            // the added model gets moved to the remove list
+            var removeModelList = document.getElementById("otherModelRem");
+            
+            moveModelBetweenSelection(addModelList,removeModelList,otherModelId);
+            
+            
+            var colorName = colorNames[window.myHorizontalBar.data.datasets.length % colorNames.length];
+            var dsColor = window.chartColors[colorName];
+            var phoneList = window.myHorizontalBar.data.labels;
+            
+            var newPerfData = phonePerformance[otherModelId];
+            console.log(newPerfData);
+            
+            var newPerfPhones = newPerfData.map(function(item){return Object.keys(item)[0]})
+            var newPerfData = newPerfData.map(function(item){return Object.values(item)[0]})
+            
+            var curData = []
+            for(phoneInd in phoneList)
+            {
+                var phoneStr = phoneList[phoneInd];
+                console.log(phoneStr)
+                if((newPerfPhones.indexOf(phoneStr) == -1/*phoneStr in newPerfPhones*/))
+                {
+                    console.log("")
+                    curData.push(0);
+                       
+                }
+                else
+                {
+                    curData.push(newPerfData[newPerfPhones.indexOf(phoneStr)]);
+                }
+            }
+            var newDataset = {
+                label: ID2ModelName[otherModelId],
+                backgroundColor: Chart.helpers.color(dsColor).alpha(0.5).rgbString(),
+                borderColor: dsColor,
+                data: curData
+            }
+            displayedModel[otherModelId] = newDataset;
+            document.getElementById("modelRemContainer").style.visibility = "visible";
+
+            window.myHorizontalBar.data.datasets.push(newDataset);
+            window.myHorizontalBar.update();
+        }
+        
+
+        
+    </script>
+</body>
+
+</html>
+

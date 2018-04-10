@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="w3.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="jquery.fullPage.css" />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
+<link rel="manifest" href="images/favicons/manifest.json">
+<link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#000000">
+<meta name="theme-color" content="#ffffff">
+<!-- End Favicons -->
+<head>
+
+
+  <!-- Hotjar Tracking Code for https://ehallpass-d65b2.firebaseapp.com/#9 -->
+  <script>
+      (function(h,o,t,j,a,r){
+          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+          h._hjSettings={hjid:695031,hjsv:6};
+          a=o.getElementsByTagName('head')[0];
+          r=o.createElement('script');r.async=1;
+          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+          a.appendChild(r);
+      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+  </script>
+
+
+  <script src="jquery.min.321.js"></script>
+  <script src="jquery.min.js"></script>
+  <script src="jquery-ui.min.js"></script>
+	<title>Numericcal</title>
+  <!-- FULLPAGE INCLUDES -->
+	<script type="text/javascript" src="jquery.fullPage.js"></script>
+  <!-- END INCLUDES -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+      console.log("test");
+			$('#fullpage').fullpage({
+				anchors: ['HomePage', 'AlphaPage', 'BlogPage', 'TeamPage', 'ContactPage'],
+				menu: '#menu',
+				navigation: true,
+				navigationPosition: 'right',
+				navigationTooltips: ['First page', 'Second page', 'Third and last page'],
+				responsiveHeight: 675, //615,
+				responsiveWidth: 1000 //1100
+			});
+      console.log("test");
+
+		});
+	</script>
+
+</head>
+<body>
+  <div class="w3-top">
+    <div class="w3-bar gr container" id="myNavbar" style="">
+      <div class="w3-bar-item w3-wide">
+        <a href="#" onclick="$.fn.fullpage.moveTo(1);">
+          <img src="images/white_tree.png" style="height: 2.5em"/>
+        </a>
+      </div>
+
+      <!-- Right-sided navbar links -->
+      <div class="w3-right w3-hide-small">
+        <a href="#" onclick="$.fn.fullpage.moveTo(2);" class="w3-bar-item w3-button" style="">Alpha</a>
+        <a href="#" onclick="$.fn.fullpage.moveTo(3);" class="w3-bar-item w3-button" style="">Blog</a>
+        <a href="#" onclick="$.fn.fullpage.moveTo(4);" class="w3-bar-item w3-button" style="">Team</a>
+        <a href="#" onclick="$.fn.fullpage.moveTo(5);" class="w3-bar-item w3-button" style="">Contact</a>
+      </div>
+      <!-- Hide right-floated links on small screens and replace them with a menu icon -->
+      <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="w3_open()">
+        <i class="fa fa-bars"></i>
+      </a>
+    </div>
+  </div>
+  <!-- Sidebar on small screens when clicking the menu icon -->
+  <nav class="w3-sidebar w3-bar-block w3-black w3-card w3-animate-left w3-hide-medium w3-hide-large" style="display:none" id="mySidebar">
+    <a href="javascript:void(0)" onclick="w3_close()" class="w3-bar-item w3-button w3-large w3-padding-16">Close ×</a>
+    <a href="#AlphaContact" onclick="w3_close(); $.fn.fullpage.moveTo(2);" class="w3-bar-item w3-button">Alpha</a>
+		<a href="#blog" onclick="w3_close(); $.fn.fullpage.moveTo(3);" class="w3-bar-item w3-button">Blog</a>
+    <a href="#team" onclick="w3_close(); $.fn.fullpage.moveTo(4);" class="w3-bar-item w3-button">Team</a>
+    <a href="#contact" onclick="w3_close(); $.fn.fullpage.moveTo(5);" class="w3-bar-item w3-button">Contact</a>
+  </nav>
+  <!-- don't know why I need this one br, but the website looks werid if it's not here -->
+  <!-- <br style="line-height:5em"> -->
+<div id="fullpage" style="">
+
+
+
+
+
+
+
+<div class="section w3-container w3-cell w3-cell-middle" id="section0">
+  <div class="w3-center w3-container page1pad">
+  <img src="images/numericcal_logo.png" class="w3-image w3-center" /> <br>
+  <h2 class="w3-left-align title"> Deploy, optimize and manage DNN models on the edge. </h2>
+  <a href="#contact" class="w3-btn w3-border w3-left" style="margin-right:8px; margin-bottom:8px">Contact Us</a>
+  </div>
+</div>
+
+
+
+
+
+
+
+<div class="section w3-cell w3-cell-middle" id="section1">
+	<div class="w3-center w3-container page2pad" id="AlphaContact" name="Alpha Form">
+	<div id="alpha_change">
+	<h1> Alpha </h1>
+	<h3>Sign up here for our alpha product.</h3>
+	<form class="w3-container contact" name="Alpha Form">
+	<h5>
+		<label>Name</label>
+		<input class="w3-input" type="text" required>
+	</h5>
+	<h5>
+		<label>Email</label>
+		<input class="w3-input" type="text" required>
+	</h5>
+	<input type="submit" class="w3-btn w3-left w3-border" value="Send">
+	</form>
+	</div>
+</div>
+</div>
+
+
+
+
+
+<div class="section w3-cell w3-cell-middle" id="section2">
+	<div class="w3-center w3-container page2pad" id="blog" name="Alpha Form">
+<a href="https://medium.com/@zach_50417" style="text-decoration:  none;">
+<h1> Blog </h1>
+<br>
+<div class="">
+	<div class="w3-container">
+		<img src="images/medium.png" alt="Avatar" class="" style="width:60px">
+		<br>
+		<h3>Visit our blog at medium.com</h3>
+</a>
+	</div>
+</div>
+</div>
+</div>
+
+
+
+
+<div class="section" id="section3 w3-cell w3-cell-middle">
+  <div class="w3-center w3-container page2pad" id="team" style="">
+  <h1>Team</h1>
+  <div class="w3-container w3-third" style="text-align:left">
+  <div style="text-align:center">
+  <img src="images/Team/RANKO.png" class="w3-image w3-round" width="474" height="474" />
+  </div>
+  <h3><strong>Ranko Sredojevic</strong></h3>
+  <h4 style="margin:0px;"> CEO </h4>
+  <p style="text-align:left; margin:0px;">
+  <!--
+  Ranko finished his PhD in Electrical Engineering and Computer Science at MIT in 2013. He published a research paper that was awarded the IEEE Best Paper Award.
+  -->
+  Ranko received his B.A.Sc. from the School of Electrical Engineering of the University of Belgrade, Serbia and his S.M. and Ph.D. from MIT. The focus of his graduate work at MIT and post-doctoral appointment at UC Berkeley was hardware-software co-design for high-performance numerical computation in embedded systems.
+  </p>
+	<br>
+  </div>
+
+  <div class="w3-container w3-third" style="text-align:left">
+  <div style="text-align:center">
+  <img src="images/Team/SHAOYI.png" class="w3-image w3-round" width="474" height="474" />
+  </div>
+  <h3><strong>Shaoyi Cheng</strong></h3>
+  <h4 style="margin:0px;"> CTO </h4>
+  <p style="text-align:left; margin:0px;">
+  Shaoyi works on hardware-specific optimization. He has a Doctorate from UC Berkeley, and he previously worked at Xilinx and Altera.
+  </p>
+	<br>
+  </div>
+
+
+  <div class="w3-container w3-third" style="text-align:left">
+  <div style="text-align:center">
+  <img src="images/Team/ZACH.png" class="w3-image w3-round" width="474" height="474" />
+  </div>
+  <h3><strong>Zach Thigpen</strong></h3>
+  <h4 style="margin:0px;"> COO </h4>
+  <p style="text-align:left; margin:0px;">
+  Zach heads up the buisness end of Numericcal, he has six years of startup marketing, strategy, and buisness development experience. He has a background in venture capital, most recently working at Bee Partners.
+  </p>
+	<br>
+  </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="section w3-container w3-cell w3-cell-middle" id="section4">
+  <!-- CONTACT US -->
+  <div class="w3-center w3-container page2pad w3-cell w3-cell-middle" style="width:100vw;" id="contact">
+  <h1> Contact Us </h1>
+
+  <form class="w3-container contact" name="Numerical Contact Form">
+    <div class="w3-row-padding">
+
+  <div class="w3-half">
+
+    <label>First Name</label>
+    <input class="w3-input w3-border" type="text" placeholder="First" required>
+
+  </div>
+  <div class="w3-half">
+
+    <label>Last Name</label>
+    <input class="w3-input w3-border" type="text" placeholder="Last" required>
+
+  </div>
+</div>
+    <div class="w3-row-padding">
+      <div class="w3-half">
+
+        <label>Company (Optional)</label>
+        <input class="w3-input w3-border" type="text" placeholder="Company">
+
+      </div>
+      <div class="w3-half">
+
+        <label>Role (Optional)</label>
+        <input class="w3-input w3-border" type="text" placeholder="Position">
+
+      </div>
+
+    <div class="w3-row-padding">
+        <label>Email</label>
+        <input class="w3-input w3-border" type="text" Placeholder="Email" required>
+    </div>
+    <div class="w3-row-padding">
+        <label>How can we help you?</label>
+
+        <select class="w3-select" name="option" required>
+        <option value="" disabled selected>Choose Option</option>
+        <option value="1">General Info (Keep Me Updated)</option>
+        <option value="2">Customer Inquiry</option>
+        <option value="3">Press Inquiry</option>
+        <option value="4">Alpha Inquiry</option>
+        <option value="3">Other</option>
+        </select>
+    </div>
+<div class="w3-row-padding">
+        <label class="">Subject</label required>
+        <textarea class="w3-input w3-border" rows="3" style="resize:none" required></textarea>
+</div>
+<div class="w3-row-padding">
+
+        <input type="submit" class="w3-btn w3-left w3-border" value="Send">
+        <br>
+      </div>
+        </div>
+  </form>
+  </div>
+</div>
+
+<div class="w3-container gr w3-center">
+  <p>&copy; Numericcal Inc.</p>
+</div>
+<!-- Closes off Fullscreen-->
+</div>
+
+
+<!-- HubSpot Embed Code -->
+<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/4001349.js"></script>
+<!-- End of HubSpot Embed Code -->
+<script>
+// Toggle between showing and hiding the sidebar when clicking the menu icon
+var mySidebar = document.getElementById("mySidebar");
+
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+      mySidebar.style.display = 'none';
+  } else {
+      mySidebar.style.display = 'block';
+  }
+}
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+}
+
+function alpha() {
+	var alphaDiv = document.getElementById("alpha_change");
+
+	document.getElementById("AlphaContact").style = "background: #409b47; animation:opac 2s; @keyframes opac{from{opacity:0} to{opacity:1};";
+	document.getElementById("section1").style = "background: #409b47; animation:opac 2s; @keyframes opac{from{opacity:0} to{opacity:1};";
+	alphaDiv.innerHTML =`
+
+	<div class="w3-container" style="background: #409b47; animation:opac 2s; @keyframes opac{from{opacity:0} to{opacity:1};">
+		<h1 style="color:white"> Thank you for your Inquiry </h1>
+		<h2 style="color:white"> Thanks for your interest in Numericcal, we'll be in touch shortly! </h2>
+	</div>
+	`;
+}
+</script>
+
+</body>
+</html>

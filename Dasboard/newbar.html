@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+
+<head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-110456586-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-110456586-1');
+</script>
+<!-- Hotjar Tracking Code for http://alpha.lab.numericcal.com/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:733916,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
+    <title>Review Performance</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="w3.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="chartjs/Chart.js"></script>
+    <script src="newbox.js" type="text/javascript"></script>
+    <script src="perfData.js"> </script>
+    <script src="tableContent.js"> </script>
+    <script src="jquery.min.js"></script>
+    <script src="utils.js"></script>
+    <script src="graphfunctions.js"></script>
+
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    #container {
+      width: 100%;
+    }
+    @media screen and (min-width: 480px) {
+      #container {
+        height: 100%;
+      }
+    }
+    </style>
+</head>
+
+<body>
+  <div class="w3-top">
+    <div class="w3-bar gr container" id="myNavbar" style="">
+      <div class="w3-bar-item w3-wide">
+          <a href="index.html" onclick=""><i class="fa fa-arrow-left" style="line-height:2.5em; font-size:1em"></i></a>
+          <!-- window.history.back(); -->
+      </div>
+      <div class="w3-bar-item w3-wide w3-right">
+          <img src="images/white_tree.png" class="w3-right" style="height: 2.5em; text-align:right"/>
+      </div>
+    </div>
+  </div>
+  <br style="line-height:5em;">
+  <div class="w3-container w3-left" style="margin-right:16px">
+    <p style="margin:0; padding:0"> Compare Models: </p>
+    <select id="Add-Select">
+    <option disabled >Compare</option>
+    </select>
+    <button id="addDataset">Add Dataset</button>
+  </div>
+  <!--<button id="expandData" class="w3-container w3-right" style="margin-right:16px">Expand Graph</button>
+-->
+    <div id="container">
+        <canvas id="canvas" ></canvas>
+    </div>
+    <script>
+    /*
+    document.getElementById('expandData').addEventListener('click', function() {
+      var ctx = document.getElementById("canvas").getContext("2d");
+
+      if (ctx.canvas.height != 800) {
+        document.getElementById('container').height = "20000px";
+        document.getElementById('container').width = "100%";
+        ctx.canvas.width = "100%";
+        ctx.canvas.height = "100%";
+        window.myBar.canvas.parentNode.style.width = "100%"
+        window.myBar.canvas.parentNode.style.height = "100%"
+        document.getElementById('expandData').innerHTML = "Collapse Graph";
+      } else {
+
+      }
+    });
+    */
+    var colors = ["#f1c40f", "#2ecc71", "#38EBFF", "#FFAF38", "#E02826", 'rgba(38, 165, 225, 1)']
+
+/* GET CONTENTS FROM GRAPJ */
+    var name = parseURLParams(window.location.href)["name"][0];
+    $( document ).ready(function() {
+    var args = []
+    for (i in parseURLParams(window.location.href)) {
+      args.push([i, parseURLParams(window.location.href)[i]]);
+    }
+
+    if (args.length > 1) {
+      var x = document.getElementById("Add-Select");
+      for(var i = 0; i < args[1][1].length; i++) {
+        for (j in x.options) {
+            if (x.options[j].value == args[1][1][i]) {
+              //console.log("deleting " + args[1][1][i]);
+              x.remove(j);
+              x.options[0].selected = false
+              var shaForModel = reverseLookup(args[1][1][i], ID2ModelName);
+              populateData(shaForModel);
+          }
+        }
+      }
+    }
+  });
+  var boxplotData = {
+      labels: populateData(name)[0],
+      datasets: [{
+          label: ID2ModelName[name],
+          backgroundColor: colors.pop(),
+          borderColor: colors.pop(),
+          borderWidth: 1,
+          data: populateData(name)[1]
+      }]
+  };
+        const samples = this.Samples.utils;
+        var color = Chart.helpers.color;
+        var boxplotData = {
+            labels: populateData(name)[0],
+            datasets: [{
+                label: ID2ModelName[name],
+                backgroundColor: colors.pop(),
+                borderColor: "#000",
+                borderWidth: 1,
+                data: populateData(name)[1]
+              }]
+        };
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+            window.myBar = new Chart(ctx, {
+                type: 'horizontalBoxplot',
+                data: boxplotData,
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'right',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Frames per Second'
+                    },
+                    scales: {
+                      xAxes: [{
+                        labels : { show : true },
+                        ticks: {
+                          beginAtZero: true,
+                          suggestedMax: maxValue(boxplotData.datasets),
+                        },
+                        position: 'top'
+                      }],
+                      yAxes: [{
+                        ticks: {
+                          fontSize: 15
+                        },
+                      }]
+                    }
+                }
+            });
+            /*GRAPHS all of the comparing NNs*/
+            var args = []
+            for (i in parseURLParams(window.location.href)) {
+              args.push([i, parseURLParams(window.location.href)[i]]);
+            }
+            if (args.length > 1) {
+            for(var i = 0; i < args[1][1].length; i++) {
+            var select = document.getElementById("Add-Select");
+            var shaKey = reverseLookup(args[1][1][i], ID2ModelName);
+            //console.log(horizontalBarChartData);
+
+            var currColor = colors.pop();
+            var newDataset = {
+                label: args[1][1][i],
+                backgroundColor: currColor,
+                borderColor: "#000",
+                borderWidth: 1,
+                data: orderVaribles(boxplotData.labels, populateData(shaKey)[0], populateData(shaKey)[1])
+                //populateData(shaKey)[1]
+
+            };
+            boxplotData.datasets.push(newDataset);
+            // HERE
+            window.myBar["options"]["scales"]["xAxes"][0]["ticks"]["suggestedMax"] = maxValue(boxplotData.datasets);
+
+            boxplotData.options
+            window.myBar.update();
+            }
+            }
+        };
+        document.getElementById('addDataset').addEventListener('click', function() {
+        var select = document.getElementById("Add-Select");
+        if (select.value != "") {
+        var shaKey = reverseLookup(select.value, ID2ModelName);
+        //console.log(horizontalBarChartData);
+        var currColor = colors.pop();
+        var newDataset = {
+            label: select.value,
+            backgroundColor: currColor,
+            borderColor: currColor,
+            borderWidth: 1,
+            data: orderVaribles(boxplotData.labels, populateData(shaKey)[0], populateData(shaKey)[1])
+        };
+          var args = []
+          for (i in parseURLParams(window.location.href)) {
+            args.push([i, parseURLParams(window.location.href)[i]]);
+          }
+          if (args.length == 1) {
+            location.href = "graph.html?name="+ args[0][1][0] + "&compare=" + select.value;
+          }
+          else {
+            //var n = args[1][1].slice(2, args[1][1].length - 1).split(",");
+            args[1][1].push(select.value);
+            var url = "graph.html?name="+ args[0][1][0];
+            for(i in args[1][1]) {
+              url = url + "&compare=" + args[1][1][i] ;
+            }
+            console.log(url);
+            location.href = url;
+          }
+        }
+      });
+      populateSelect();
+    </script>
+</body>
+
+</html>

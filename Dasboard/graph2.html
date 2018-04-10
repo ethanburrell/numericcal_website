@@ -1,0 +1,207 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Horizontal Bar Chart</title>
+    <script src="chartjs/Chart.js"> </script>
+    <script src="chartjs/Chart.min.js"> </script>
+    <script src="jquery.min.321.js"></script>
+    <script src="jquery.min.js"></script>
+    <script src="perfData.js"></script>
+    <style>
+    canvas {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container" style="width: 100%;">
+        <canvas id="canvas"></canvas>
+    </div>
+  <select id="Add-Select">
+    <option>sha goes here</option>
+  </select>
+  <button id="addDataset">Add Dataset</button>
+
+  <script>
+  function parseURLParams(url) {
+      var queryStart = url.indexOf("?") + 1,
+          queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+          query = url.slice(queryStart, queryEnd - 1),
+          pairs = query.replace(/\+/g, " ").split("&"),
+          parms = {}, i, n, v, nv;
+
+      if (query === url || query === "") return;
+
+      for (i = 0; i < pairs.length; i++) {
+          nv = pairs[i].split("=", 2);
+          n = decodeURIComponent(nv[0]);
+          v = decodeURIComponent(nv[1]);
+
+          if (!parms.hasOwnProperty(n)) parms[n] = [];
+          parms[n].push(nv.length === 2 ? v : null);
+      }
+      return parms;
+  }
+
+  var name = parseURLParams(window.location.href)["name"][0];
+  </script>
+
+  <script>
+  var colors = ["#FFAF38", "#E02826", 'rgba(38, 165, 225, 1)']
+  function populateData(sha) {
+    x = [];
+    y = [];
+      for (l in sha) {
+        if (phonePerformance[sha].hasOwnProperty(l)) {
+        //console.log(phonePerformance[sha][l]);
+          for (device in phonePerformance[sha][l]) {
+            x.push(device);
+            y.push(phonePerformance[sha][l][device]);
+          }
+      }
+  }
+  return [x, y]
+    //return 2 Arrays
+  }
+  function reverseLookup(value, dict){
+    for (i in dict) {
+      if (dict[i] == value)
+        return i;
+      }
+    }
+  var n = reverseLookup(name, ID2ModelName);
+  var horizontalBarChartData = {
+      labels: populateData(name)[0],
+      datasets: [{
+          label: ID2ModelName[name],
+          backgroundColor: colors.pop(),
+          borderWidth: 1,
+          data: populateData(name)[1]
+      }]
+  };
+
+
+  window.onload = function() {
+    var ctx = document.getElementById("canvas").getContext("2d");
+    window.myHorizontalBar = new Chart(ctx, {
+        type: 'horizontalBar',
+        data: horizontalBarChartData,
+        options: {
+            // Elements options apply to all of the options unless overridden in a dataset
+            // In this case, we are setting the border of each horizontal bar to be 2px wide
+            elements: {
+                rectangle: {
+                    borderWidth: 2,
+                }
+            },
+            responsive: true,
+            legend: {
+                position: 'right',
+            },
+            title: {
+                display: true,
+                text: 'Average Frames per Second'
+            }
+        }
+    });
+};
+
+function orderVaribles(correctOrder, currentOrder, values) {
+  // Returns list values in the format of correctOrder
+  v = [];
+  console.log(correctOrder, currentOrder);
+  for (i in correctOrder) {
+    for (var j = 0; j < currentOrder.length; j++) {
+      if (correctOrder[i] == currentOrder[j]) {
+        v.push(values[j])
+      }
+    }
+  }
+  console.log(v);
+  return v;
+}
+
+document.getElementById('addDataset').addEventListener('click', function() {
+    var select = document.getElementById("Add-Select");
+    var shaKey = reverseLookup(select.value, ID2ModelName);
+    console.log(horizontalBarChartData);
+    var newDataset = {
+        label: select.value,
+        backgroundColor: colors.pop(),
+        data: orderVaribles(horizontalBarChartData.labels, populateData(shaKey)[0], populateData(shaKey)[1])
+    };
+    /*
+    for (var index = 0; index < horizontalBarChartData.labels.length; ++index) {
+        newDataset.data.push(populateData(shaKey)[1]);
+    }
+    */
+    horizontalBarChartData.datasets.push(newDataset);
+    window.myHorizontalBar.update();
+});
+  </script>
+
+
+
+
+    <script>
+    var select = document.getElementById("Add-Select");
+    for (sha in phonePerformance) {
+      console.log(sha);
+      var option = document.createElement("option");
+      option.text = ID2ModelName[sha];
+      select.add(option);
+      for (l in sha) {
+        if (phonePerformance[sha].hasOwnProperty(l)) {
+        //console.log(phonePerformance[sha][l]);
+          for (device in phonePerformance[sha][l]) {
+            /*
+            console.log("device");
+            console.log(device);
+            console.log(phonePerformance[sha][l][device]);
+            */
+          }
+      }
+    }
+  }
+    /*
+    How I'm going to store the individual data:
+    Dictionary {"[Name, sha]": {[x]} {[y]}}
+    */
+    /*
+    for (sha in phonePerformance) {
+      console.log(sha);
+      for (l in sha) {
+        if (phonePerformance[sha].hasOwnProperty(l)) {
+        //console.log(phonePerformance[sha][l]);
+          for (device in phonePerformance[sha][l]) {
+            console.log("device");
+            console.log(device);
+            console.log(phonePerformance[sha][l][device]);
+          }
+      }
+    }
+  }
+  // ============
+  var x = [];
+  var y = [];
+  var sha = "5f3fee01ed94dfd9a43a311476fcc209966e634175667ea4dd9c19b534ebbdaf";
+  if (phonePerformance["5f3fee01ed94dfd9a43a311476fcc209966e634175667ea4dd9c19b534ebbdaf"]) {
+  //console.log(phonePerformance[sha][l]);
+  for (l in phonePerformance["5f3fee01ed94dfd9a43a311476fcc209966e634175667ea4dd9c19b534ebbdaf"]) {
+    for (device in phonePerformance["5f3fee01ed94dfd9a43a311476fcc209966e634175667ea4dd9c19b534ebbdaf"][l]) {
+      //console.log("device");
+      x.push(device);
+      y.push(phonePerformance[sha][l][device]);
+    }
+  }
+  }
+*/
+
+    </script>
+</body>
+
+</html>
